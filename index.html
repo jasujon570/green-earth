@@ -27,13 +27,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/style.css">
 
 </head>
 
 <body class="font-[Inter]">
 
-    <header class="bg-[#15803D]">
+    <header hidden class="bg-[#15803D]">
         <div class="navbar text-white w-10/12 mx-auto">
             <div class="navbar-start">
                 <div class="dropdown">
@@ -66,7 +66,7 @@
         </div>
     </header>
 
-    <section class="bg-[#CFF0DC]">
+    <section hidden class="bg-[#CFF0DC]">
         <div class="flex flex-col md:flex-row justify-between items-center gap-5">
             <img class="" src="./assets/hero-leaf1.png" alt="">
             <div class="text-center">
@@ -82,26 +82,17 @@
     </section>
 
 
-    <section hidden class=" bg-[#F0FDF4] py-[100px]">
+    <section class=" bg-[#F0FDF4] py-[100px]">
         <div class="w-10/12 mx-auto">
             <h2 class="text-center font-semibold text-3xl text-[#1F2937] mb-10">Choose Your Trees</h2>
-            <div class="flex justify-between">
+            <div class="flex justify-between p-4 border rounded shadow">
                 <div class="categories w-[250px]">
-                    <h2>Categories</h2>
-                    <ul>
-                        <li>All Trees</li>
-                        <li>Fruit Trees</li>
-                        <li>Flowering Trees</li>
-                        <li>Shade Trees</li>
-                        <li>Medicinal Trees</li>
-                        <li>Timber Trees</li>
-                        <li>Evergreen Trees</li>
-                        <li>Ornamental Plants</li>
-                        <li>Bamboo</li>
-                        <li>Climbers</li>
-                        <li>Aquatic Plants</li>
+                    <h2 class="text-xl font-bold mb-3">Categories</h2>
+                    <ul id="categories" class="space-y-2">
+                        
                     </ul>
                 </div>
+
                 <div class="items-card grid grid-cols-3 gap-7 w-[1090px]">
                     <div class="bg-white w-[343px] p-4 space-y-3 rounded-lg">
                         <img class="w-full h-[187px] rounded-lg" src="./assets/mango-tree.jpg" alt="">
@@ -176,6 +167,7 @@
                             Cart</button>
                     </div>
                 </div>
+                
                 <div class="my-cart bg-white w-[250px] p-4 rounded-2xl space-y-2">
                     <h2 class="font-semibold text-xl">Your Cart</h2>
                     <div class="flex items-center bg-[#F0FDF4] py-2 px-3 justify-between">
@@ -195,7 +187,7 @@
 
     </section>
 
-    <section class="bg-[#F0FDF4]">
+    <section hidden class="bg-[#F0FDF4]">
         <div class="w-[57%] mx-auto">
             <h2 class="text-center font-semibold text-3xl text-[#1F2937] mb-10">About the Campaign</h2>
             <div class="flex flex-col md:flex-row items-center gap-7">
@@ -214,7 +206,7 @@
         </div>
     </section>
 
-    <section class="bg-[#CFF0DC] py-[100px]">
+    <section hidden class="bg-[#CFF0DC] py-[100px]">
         <h2 class="text-center font-semibold text-3xl text-[#1F2937] mb-10">About the Campaign</h2>
         <div class="flex flex-col md:flex-row justify-between w-10/12 mx-auto gap-12">
             <div class="bg-white rounded-xl space-y-[12px] py-10 px-10 w-full md:w-[33%] text-center">
@@ -232,7 +224,7 @@
         </div>
     </section>
 
-    <section class="bg-[#166534] text-white text-center py-[100px]">
+    <section hidden class="bg-[#166534] text-white text-center py-[100px]">
         <h2 class="text-center font-semibold text-3xl mb-10">Plant a Tree Today</h2>
         <form class="bg-[#15803D] w-[80%] md:w-[34%] mx-auto p-10 space-y-[12px] rounded-xl">
             <input class="w-full p-3 rounded-md bg-white text-[#1F2937]" type="text" placeholder="Your Name"><br>
@@ -244,7 +236,7 @@
         </form>
     </section>
 
-    <footer class="bg-[#14532D] text-center text-white">
+    <footer hidden class="bg-[#14532D] text-center text-white">
         <p class="py-6">© 2025 Green Earth. All Rights Reserved.</p>
     </footer>
 
