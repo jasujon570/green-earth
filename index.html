@@ -85,9 +85,9 @@
     <section class="bg-[#F0FDF4] py-[100px]">
         <div class="w-10/12 mx-auto">
             <h2 class="text-center font-semibold text-3xl text-[#1F2937] mb-10">Choose Your Trees</h2>
-            <div class="flex justify-between p-4 rounded">
+            <div class="flex flex-col md:flex-row justify-center md:justify-between p-4 rounded gap-5">
                 <!-- category section -->
-                <div class="w-[250px]">
+                <div class="w-full md:w-[250px]">
                     <h2 class="text-xl font-bold mb-3">Categories</h2>
                     <ul id="categories-container" class="space-y-2">
 
@@ -95,11 +95,14 @@
                 </div>
 
                 <!-- Tree section -->
-                <div id="tree-container" class="grid grid-cols-3 gap-7 w-[1090px]">
+                <div id="tree-container" class="flex flex-wrap justify-center gap-7 w-full md:w-[1090px] mx-auto">
                     
+                
                 </div>
 
-                <div class="my-cart bg-white w-[250px] p-4 rounded-2xl space-y-2">
+                
+
+                <div class="my-cart bg-white w-full md:w-[250px] p-4 rounded-2xl space-y-2">
                     <h2 class="font-semibold text-xl">Your Cart</h2>
                     <div class="flex items-center bg-[#F0FDF4] py-2 px-3 justify-between">
                         <div>
@@ -115,8 +118,19 @@
                 </div>
             </div>
         </div>
-
     </section>
+
+    <!-- Modal -->
+    <dialog id="plant_card_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div id="plant-card-details"></div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
     <section hidden class="bg-[#F0FDF4]">
         <div class="w-[57%] mx-auto">
