@@ -1,3 +1,56 @@
+let cart = [];
+
+const addToCart = (plant) => {
+  const existingPlant = cart.find((item) => item.id === plant.id);
+  if (existingPlant) {
+    existingPlant.quantity++;
+  } else {
+    cart.push({ ...plant, quantity: 1 });
+  }
+
+  displayCart();
+  updateTotal();
+};
+
+const displayCart = () => {
+  const cartContainer = document.getElementById("cart-items-container");
+  cartContainer.innerHTML = "";
+
+  cart.forEach((plant) => {
+    const cartItem = document.createElement("div");
+    cartItem.classList.add(
+      "flex",
+      "items-center",
+      "bg-[#F0FDF4]",
+      "py-2",
+      "px-3",
+      "justify-between",
+      "rounded"
+    );
+
+    cartItem.innerHTML = `
+        <div>
+            <h3 class="font-semibold text-sm">${plant.name}</h3>
+            <span class="text-[#8C8C8C]">৳${plant.price} x ${plant.quantity}</span>
+        </div>
+        <i class="fa-solid fa-xmark text-[#1F2937] cursor-pointer"></i>
+        
+    `;
+
+    cartContainer.append(cartItem);
+  });
+};
+
+const updateTotal = () => {
+  const totalPriceElement = document.getElementById("total-price");
+  const total = cart.reduce(
+    (sum, plant) => sum + plant.price * plant.quantity,
+    0
+  );
+
+  totalPriceElement.innerText = total;
+};
+
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -5,9 +58,9 @@ const loadCategories = () => {
 };
 
 const loadAllTree = () => {
-    fetch("https://openapi.programming-hero.com/api/plants")
-        .then((res) => res.json())
-        .then((json) => displayTree(json.plants));
+  fetch("https://openapi.programming-hero.com/api/plants")
+    .then((res) => res.json())
+    .then((json) => displayTree(json.plants));
 };
 
 const loadPlants = (id) => {
@@ -22,18 +75,16 @@ const loadPlants = (id) => {
     });
 };
 
-const loadCardDetails = async(id) => {
+const loadCardDetails = async (id) => {
   const url = `https://openapi.programming-hero.com/api/plant/${id}`;
   const res = await fetch(url);
   const details = await res.json();
   displayCardDetails(details.plants);
 };
 
-
-
-const displayCardDetails = (card) =>{
-    const displayPlantDetails = document.getElementById('plant-card-details');
-    displayPlantDetails.innerHTML = `
+const displayCardDetails = (card) => {
+  const displayPlantDetails = document.getElementById("plant-card-details");
+  displayPlantDetails.innerHTML = `
         <div>
             <img class="w-full h-[200px] rounded-lg mb-3" src="${card.image}" alt="${card.name}">
         </div>
@@ -48,13 +99,10 @@ const displayCardDetails = (card) =>{
         <div>
             <button class="w-full bg-[#15803D] text-white font-medium py-3 rounded-[999px] mt-2">Add to Cart</button>
         </div>  
-    `
-    ;
+    `;
 
-
-
-    document.getElementById('plant_card_modal').showModal();
-}
+  document.getElementById("plant_card_modal").showModal();
+};
 
 const removeActive = () => {
   const categoryButtons = document.querySelectorAll(".cat-btn");
@@ -77,16 +125,24 @@ const displayTree = (plants) => {
     );
 
     cardDiv.innerHTML = `
-        <img class="w-full h-[200px] rounded-lg mb-3" src="${plant.image}" alt="${plant.name}">
+        <img class="w-full h-[200px] rounded-lg mb-3" src="${
+          plant.image
+        }" alt="${plant.name}">
         <div class="flex flex-col flex-grow">
-            <h3 onclick="loadCardDetails(${plant.id})" class="font-semibold text-xl cursor-pointer">${plant.name}</h3>
+            <h3 onclick="loadCardDetails(${
+              plant.id
+            })" class="font-semibold text-xl cursor-pointer">${plant.name}</h3>
             <p class="text-[#1F2937] py-5">${plant.description}</p>
             <div class="mt-auto">
                 <div class="flex justify-between mb-3">
-                    <button class="text-[#15803D] bg-[#DCFCE7] py-1 px-3 rounded-[400px]">${plant.category}</button>
+                    <button class="text-[#15803D] bg-[#DCFCE7] py-1 px-3 rounded-[400px]">${
+                      plant.category
+                    }</button>
                     <p><span>৳</span>${plant.price}</p>
                 </div>
-                <button class="w-full bg-[#15803D] text-white font-medium py-3 rounded-[999px] mt-2">Add to Cart</button>
+                <button onclick='addToCart(${JSON.stringify(
+                  plant
+                )})' class="w-full bg-[#15803D] text-white font-medium py-3 rounded-[999px] mt-2">Add to Cart</button>
             </div>
         </div>
             
@@ -113,7 +169,31 @@ const displayCategories = (categories) => {
   }
 };
 
+// const addToCart = (plant) => {
+//   const cartContainer = document.getElementById("cart-items-container");
 
+//   const cartItem = document.createElement("div");
+//   cartItem.classList.add(
+//     "flex",
+//     "items-center",
+//     "bg-[#F0FDF4]",
+//     "py-2",
+//     "px-3",
+//     "justify-between",
+//     "rounded"
+//   );
+
+//   cartItem.innerHTML = `
+//         <div>
+//             <h3 class="font-semibold text-sm">${plant.name}</h3>
+//             <span class="text-[#8C8C8C]">৳${plant.price}</span>
+//         </div>
+//         <i class="fa-solid fa-xmark text-[#1F2937] cursor-pointer"></i>
+
+//     `;
+
+//   cartContainer.append(cartItem);
+// };
 
 loadCategories();
 loadAllTree();
