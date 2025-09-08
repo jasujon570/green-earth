@@ -12,6 +12,19 @@ const addToCart = (plant) => {
   updateTotal();
 };
 
+const toggleSpinner = (isLoading) => {
+  const spinner = document.getElementById("loading-spinner");
+  const treeContainer = document.getElementById("tree-container");
+
+  if (isLoading) {
+    spinner.classList.remove("hidden");
+    treeContainer.classList.add("hidden");
+  } else {
+    spinner.classList.add("hidden");
+    treeContainer.classList.remove("hidden");
+  }
+};
+
 const displayCart = () => {
   const cartContainer = document.getElementById("cart-items-container");
   cartContainer.innerHTML = "";
