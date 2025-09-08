@@ -33,8 +33,7 @@ const displayCart = () => {
             <h3 class="font-semibold text-sm">${plant.name}</h3>
             <span class="text-[#8C8C8C]">৳${plant.price} x ${plant.quantity}</span>
         </div>
-        <i class="fa-solid fa-xmark text-[#1F2937] cursor-pointer"></i>
-        
+        <i onclick="removeFromCart(${plant.id})" class="fa-solid fa-xmark text-[#1F2937] cursor-pointer"></i>
     `;
 
     cartContainer.append(cartItem);
@@ -169,31 +168,15 @@ const displayCategories = (categories) => {
   }
 };
 
-// const addToCart = (plant) => {
-//   const cartContainer = document.getElementById("cart-items-container");
+const removeFromCart = (plantId) => {
+  const itemIndex = cart.findIndex((item) => item.id === plantId);
 
-//   const cartItem = document.createElement("div");
-//   cartItem.classList.add(
-//     "flex",
-//     "items-center",
-//     "bg-[#F0FDF4]",
-//     "py-2",
-//     "px-3",
-//     "justify-between",
-//     "rounded"
-//   );
-
-//   cartItem.innerHTML = `
-//         <div>
-//             <h3 class="font-semibold text-sm">${plant.name}</h3>
-//             <span class="text-[#8C8C8C]">৳${plant.price}</span>
-//         </div>
-//         <i class="fa-solid fa-xmark text-[#1F2937] cursor-pointer"></i>
-
-//     `;
-
-//   cartContainer.append(cartItem);
-// };
+  if (itemIndex > -1) {
+    cart.splice(itemIndex, 1);
+  }
+  displayCart();
+  updateTotal();
+};
 
 loadCategories();
 loadAllTree();
