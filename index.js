@@ -143,7 +143,6 @@ const displayTree = (plants) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add(
       "bg-white",
-      "w-[343px]",
       "p-4",
       "rounded-lg",
       "flex",
