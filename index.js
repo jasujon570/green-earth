@@ -70,12 +70,25 @@ const loadCategories = () => {
 };
 
 const loadAllTree = () => {
+  removeActive();
+  const allTreesBtn = document.getElementById("all-trees-btn");
+  if (allTreesBtn) {
+    allTreesBtn.classList.add("active");
+  }
+
+  toggleSpinner(true);
+
   fetch("https://openapi.programming-hero.com/api/plants")
     .then((res) => res.json())
-    .then((json) => displayTree(json.plants));
+    .then((json) => {
+      displayTree(json.plants);
+      toggleSpinner(false);
+    });
 };
 
 const loadPlants = (id) => {
+  toggleSpinner(true);
+
   const url = `https://openapi.programming-hero.com/api/category/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -84,6 +97,7 @@ const loadPlants = (id) => {
       const clickCat = document.getElementById(`cat-${id}`);
       clickCat.classList.add("active");
       displayTree(data.plants);
+      toggleSpinner(false);
     });
 };
 
@@ -137,7 +151,7 @@ const displayTree = (plants) => {
     );
 
     cardDiv.innerHTML = `
-        <img class="w-full h-[200px] rounded-lg mb-3" src="${
+        <img class="w-full h-42 object-cover rounded-lg mb-3" src="${
           plant.image
         }" alt="${plant.name}">
         <div class="flex flex-col flex-grow">
@@ -164,19 +178,27 @@ const displayTree = (plants) => {
   });
 };
 
+
 const displayCategories = (categories) => {
   const categoriesContainer = document.getElementById("categories-container");
   categoriesContainer.innerHTML = "";
 
+  const allTreesItem = document.createElement("div");
+  allTreesItem.innerHTML = `
+        <button id="all-trees-btn" onclick="loadAllTree()" class="category-btn w-full text-left p-2 rounded cat-btn hover:bg-blue-200 active">
+            All Trees
+        </button>
+    `;
+  categoriesContainer.append(allTreesItem);
+
+
   for (const category of categories) {
     const categoryList = document.createElement("div");
     categoryList.innerHTML = `
-            <button id="cat-${category.id}" onclick="loadPlants(${category.id})" class="category-btn w-full text-left p-2 rounded cat-btn"
-            >
+            <button id="cat-${category.id}" onclick="loadPlants(${category.id})" class="category-btn w-full text-left p-2 rounded cat-btn hover:bg-blue-200">
                 ${category.category_name}
             </button>
         `;
-
     categoriesContainer.append(categoryList);
   }
 };
